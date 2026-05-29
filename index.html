@@ -736,29 +736,33 @@
     <div class="form-card reveal d2">
       <h3>Request a Free Quote</h3>
       <p class="fp">Tell us about your property and we'll be in touch.</p>
-      <div class="field"><label>Name</label><input type="text" id="f-name" placeholder="Your name"></div>
-      <div class="field"><label>Email or Phone</label><input type="text" id="f-contact" placeholder="How we can reach you"></div>
-      <div class="field"><label>Service Needed</label>
-        <select id="f-svc">
-          <option>Subscription Plan (Basic / Standard / Premium)</option>
-          <option>Plumbing</option>
-          <option>Electrical</option>
-          <option>HVAC (Heating & Cooling)</option>
-          <option>Roofing</option>
-          <option>Painting</option>
-          <option>Appliance Installation</option>
-          <option>Furniture Assembly</option>
-          <option>Handyman / Small Fixes</option>
-          <option>Deep Cleaning</option>
-          <option>Standard / Recurring Cleaning</option>
-          <option>Power Washing</option>
-          <option>Lawn Maintenance</option>
-          <option>Junk Removal</option>
-          <option>Multiple / Not sure — need advice</option>
-        </select>
-      </div>
-      <div class="field"><label>Project Details</label><textarea id="f-msg" placeholder="Tell us about the property and what you need..."></textarea></div>
-      <button class="cta-btn gold" id="f-submit">Send Request →</button>
+      <form id="quoteForm" action="https://formspree.io/f/mreddyeq" method="POST">
+        <div class="field"><label>Name</label><input type="text" name="name" id="f-name" placeholder="Your name" required></div>
+        <div class="field"><label>Email</label><input type="email" name="email" id="f-email" placeholder="you@email.com" required></div>
+        <div class="field"><label>Phone</label><input type="tel" name="phone" id="f-phone" placeholder="(214) 000-0000"></div>
+        <div class="field"><label>Service Needed</label>
+          <select name="service" id="f-svc">
+            <option>Subscription Plan (Basic / Standard / Premium)</option>
+            <option>Plumbing</option>
+            <option>Electrical</option>
+            <option>HVAC (Heating & Cooling)</option>
+            <option>Roofing</option>
+            <option>Painting</option>
+            <option>Appliance Installation</option>
+            <option>Furniture Assembly</option>
+            <option>Handyman / Small Fixes</option>
+            <option>Deep Cleaning</option>
+            <option>Standard / Recurring Cleaning</option>
+            <option>Power Washing</option>
+            <option>Lawn Maintenance</option>
+            <option>Junk Removal</option>
+            <option>Multiple / Not sure — need advice</option>
+          </select>
+        </div>
+        <div class="field"><label>Project Details</label><textarea name="details" id="f-msg" placeholder="Tell us about the property and what you need..."></textarea></div>
+        <input type="hidden" name="_subject" value="New Quote Request — Atlas Gate Website">
+        <button type="submit" class="cta-btn gold" id="f-submit">Send Request →</button>
+      </form>
       <div class="form-note" id="f-note">✓ Thank you! We'll be in touch shortly.</div>
     </div>
   </div>
@@ -873,24 +877,62 @@ function closeSchedule(){
 schedModal.addEventListener('click',e=>{if(e.target===schedModal)closeSchedule();});
 addEventListener('keydown',e=>{if(e.key==='Escape')closeSchedule();});
 
-document.getElementById('schedSubmit').onclick=()=>{
+document.getElementById('schedSubmit').onclick=async()=>{
+  const btn=document.getElementById('schedSubmit');
   const n=document.getElementById('s-name').value.trim();
   const p=document.getElementById('s-phone').value.trim();
   const em=document.getElementById('s-email').value.trim();
   if(!n||(!p&&!em)){alert('Please add your name and a phone or email so we can reach you.');return;}
-  alert('Thanks, '+n+'! We\u2019ve got your request for the '+currentPlan+' plan and will reach out shortly to confirm scheduling.');
-  closeSchedule();
-  ['s-name','s-phone','s-email','s-addr','s-date','s-notes'].forEach(id=>document.getElementById(id).value='');
+  btn.textContent='Sending...';btn.disabled=true;
+  const data=new FormData();
+  data.append('_subject','New Subscription Request ('+currentPlan+') — Atlas Gate Website');
+  data.append('plan',currentPlan);
+  data.append('name',n);
+  data.append('phone',p);
+  data.append('email',em);
+  data.append('address',document.getElementById('s-addr').value.trim());
+  data.append('preferred_start_date',document.getElementById('s-date').value);
+  data.append('notes',document.getElementById('s-notes').value.trim());
+  try{
+    const res=await fetch('https://formspree.io/f/mreddyeq',{method:'POST',body:data,headers:{'Accept':'application/json'}});
+    if(res.ok){
+      alert('Thanks, '+n+'! We\u2019ve got your request for the '+currentPlan+' plan and will reach out shortly to confirm scheduling.');
+      closeSchedule();
+      ['s-name','s-phone','s-email','s-addr','s-date','s-notes'].forEach(id=>document.getElementById(id).value='');
+    }else{
+      alert('Sorry, something went wrong. Please call (214) 819-0233 or email Office@atlasgategroupllc.com.');
+    }
+  }catch(err){
+    alert('Network error — please call (214) 819-0233 or email Office@atlasgategroupllc.com.');
+  }
+  btn.textContent='Or Request a Call Back';btn.disabled=false;
 };
 
-/* contact form (demo) */
-document.getElementById('f-submit').onclick=()=>{
-  const n=document.getElementById('f-name').value.trim();
-  const c=document.getElementById('f-contact').value.trim();
-  if(!n||!c){alert('Please add your name and how we can reach you.');return;}
-  document.getElementById('f-note').style.display='block';
-  ['f-name','f-contact','f-msg'].forEach(id=>document.getElementById(id).value='');
-};
+/* quote form -> Formspree (stays on page, shows thank-you) */
+const quoteForm=document.getElementById('quoteForm');
+const fNote=document.getElementById('f-note');
+const fSubmit=document.getElementById('f-submit');
+quoteForm.addEventListener('submit',async(e)=>{
+  e.preventDefault();
+  fSubmit.textContent='Sending...';fSubmit.disabled=true;
+  try{
+    const res=await fetch(quoteForm.action,{
+      method:'POST',
+      body:new FormData(quoteForm),
+      headers:{'Accept':'application/json'}
+    });
+    if(res.ok){
+      quoteForm.style.display='none';
+      fNote.style.display='block';
+    }else{
+      alert('Sorry, something went wrong sending your request. Please call (214) 819-0233 or email Office@atlasgategroupllc.com.');
+      fSubmit.textContent='Send Request →';fSubmit.disabled=false;
+    }
+  }catch(err){
+    alert('Network error — please call (214) 819-0233 or email Office@atlasgategroupllc.com.');
+    fSubmit.textContent='Send Request →';fSubmit.disabled=false;
+  }
+});
 
 /* ---------- CHATBOT (rule-based) ---------- */
 const fab=document.getElementById('chatFab'),panel=document.getElementById('chatPanel'),
