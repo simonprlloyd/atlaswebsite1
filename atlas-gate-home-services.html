@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Atlas Gate Home Services — Property Care Done Right the First Time</title>
+<meta name="description" content="Dependable property preservation, make-ready, and exterior services for landlords, investors, realtors, and homeowners across Dallas–Fort Worth.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Archivo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0e1f3d;        /* deep navy */
+    --slate:#39476b;      /* muted navy */
+    --moss:#1c3461;       /* navy mid */
+    --sage:#9fb0d0;       /* soft navy-grey */
+    --gold:#c8a24a;       /* gold */
+    --gold-deep:#a8842f;  /* deep gold */
+    --cream:#f3f5fa;      /* near-white cool */
+    --paper:#ffffff;      /* white */
+    --line:rgba(14,31,61,.12);
+    --shadow:0 20px 60px -20px rgba(14,31,61,.28);
+    --display:'Fraunces',serif;
+    --body:'Archivo',sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--body);
+    color:var(--ink);
+    background:var(--paper);
+    line-height:1.6;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--gold);color:#fff}
+  a{text-decoration:none;color:inherit}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 28px}
+
+  /* ---------- NAV ---------- */
+  header.nav{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    transition:all .4s ease;
+    padding:22px 0;
+  }
+  header.nav.scrolled{
+    background:rgba(255,255,255,.88);
+    backdrop-filter:blur(14px);
+    padding:13px 0;
+    box-shadow:0 1px 0 var(--line);
+  }
+  .nav-inner{display:flex;align-items:center;justify-content:space-between}
+  .logo{display:flex;align-items:center;gap:12px;font-family:var(--display);font-weight:600;font-size:1.32rem;letter-spacing:-.01em}
+  .logo .mark{
+    width:40px;height:40px;border-radius:11px;
+    background:linear-gradient(140deg,var(--moss),var(--ink));
+    display:grid;place-items:center;color:var(--gold);
+    font-family:var(--display);font-weight:700;font-size:1.25rem;
+    box-shadow:inset 0 0 0 1.5px rgba(200,151,63,.4);
+  }
+  .logo small{display:block;font-family:var(--body);font-weight:500;font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--moss);margin-top:-2px}
+  nav ul{list-style:none;display:flex;gap:34px;align-items:center}
+  nav a{font-size:.92rem;font-weight:500;color:var(--slate);position:relative;transition:color .25s}
+  nav a::after{content:"";position:absolute;left:0;bottom:-5px;width:0;height:2px;background:var(--gold);transition:width .3s}
+  nav a:hover{color:var(--ink)}
+  nav a:hover::after{width:100%}
+  .cta-btn{
+    background:var(--ink);color:var(--cream);padding:12px 22px;border-radius:50px;
+    font-weight:600;font-size:.9rem;display:inline-flex;align-items:center;gap:8px;
+    transition:transform .25s,box-shadow .25s,background .25s;border:none;cursor:pointer;
+  }
+  .cta-btn:hover{transform:translateY(-2px);box-shadow:0 12px 28px -10px rgba(14,31,61,.6);background:var(--moss)}
+  .cta-btn.gold{background:var(--gold);color:var(--ink)}
+  .cta-btn.gold:hover{background:var(--gold-deep);color:#fff}
+  .nav-toggle{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px}
+  .nav-toggle span{width:26px;height:2px;background:var(--ink);transition:.3s}
+
+  /* ---------- HERO ---------- */
+  .hero{position:relative;min-height:100vh;display:flex;align-items:center;padding-top:120px;padding-bottom:60px;overflow:hidden}
+  .hero-bg{
+    position:absolute;inset:0;z-index:0;
+    background:
+      radial-gradient(ellipse 80% 60% at 75% 25%,rgba(28,52,97,.22),transparent 60%),
+      radial-gradient(ellipse 70% 70% at 15% 80%,rgba(200,151,63,.14),transparent 55%),
+      var(--paper);
+  }
+  .hero-grain{position:absolute;inset:0;z-index:0;opacity:.3;mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");}
+  .hero-inner{position:relative;z-index:2;display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;width:100%}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:9px;font-size:.74rem;font-weight:600;
+    letter-spacing:.2em;text-transform:uppercase;color:var(--moss);
+    background:rgba(28,52,97,.16);padding:8px 15px;border-radius:50px;margin-bottom:26px;
+  }
+  .eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 4px rgba(200,151,63,.2)}
+  h1.hero-title{
+    font-family:var(--display);font-weight:600;font-size:clamp(2.7rem,5.4vw,4.5rem);
+    line-height:1.02;letter-spacing:-.025em;color:var(--ink);margin-bottom:22px;
+  }
+  h1.hero-title em{font-style:italic;color:var(--gold-deep)}
+  .hero-sub{font-size:1.12rem;color:var(--slate);max-width:520px;margin-bottom:34px}
+  .hero-actions{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  .hero-actions .cta-btn{padding:15px 28px;font-size:.98rem}
+  .link-arrow{font-weight:600;color:var(--ink);display:inline-flex;align-items:center;gap:8px;transition:gap .25s}
+  .link-arrow:hover{gap:13px}
+  .hero-stats{display:flex;gap:36px;margin-top:48px;padding-top:30px;border-top:1px solid var(--line)}
+  .stat .n{font-family:var(--display);font-size:2rem;font-weight:600;color:var(--ink);line-height:1}
+  .stat .l{font-size:.82rem;color:var(--moss);margin-top:4px}
+
+  .hero-visual{position:relative}
+  .hero-card{
+    position:relative;border-radius:26px;overflow:hidden;box-shadow:var(--shadow);
+    background:linear-gradient(160deg,var(--moss),var(--ink));
+  }
+  .hero-card img{width:100%;height:auto;display:block;object-fit:contain}
+  .hero-badge{
+    position:absolute;background:var(--paper);border-radius:18px;padding:16px 18px;
+    box-shadow:var(--shadow);display:flex;align-items:center;gap:13px;
+  }
+  .hero-badge.tl{top:24px;left:-28px;animation:float 6s ease-in-out infinite}
+  .hero-badge.br{bottom:30px;right:-22px;animation:float 6s ease-in-out infinite .8s}
+  .hero-badge .ic{width:42px;height:42px;border-radius:12px;background:rgba(200,151,63,.18);display:grid;place-items:center;color:var(--gold-deep)}
+  .hero-badge .t{font-weight:700;font-size:.95rem;line-height:1.1}
+  .hero-badge .s{font-size:.74rem;color:var(--moss)}
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+  .reveal.in{opacity:1;transform:none}
+  .reveal.d1{transition-delay:.1s}.reveal.d2{transition-delay:.2s}.reveal.d3{transition-delay:.3s}.reveal.d4{transition-delay:.4s}
+
+  /* ---------- SECTION SHELL ---------- */
+  section{position:relative}
+  .sec-pad{padding:110px 0}
+  .sec-head{max-width:680px;margin-bottom:56px}
+  .sec-tag{font-size:.76rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-deep);display:flex;align-items:center;gap:12px;margin-bottom:18px}
+  .sec-tag::before{content:"";width:34px;height:2px;background:var(--gold)}
+  h2.sec-title{font-family:var(--display);font-weight:600;font-size:clamp(2rem,3.8vw,3rem);line-height:1.08;letter-spacing:-.02em;color:var(--ink)}
+  .sec-title em{font-style:italic;color:var(--moss)}
+  .sec-desc{font-size:1.06rem;color:var(--slate);margin-top:18px}
+
+  /* ---------- COMMITMENT ---------- */
+  .commit{background:linear-gradient(180deg,var(--paper),var(--cream))}
+  .commit-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+  .commit-points{display:flex;flex-direction:column;gap:26px;margin-top:34px}
+  .point{display:flex;gap:18px;align-items:flex-start}
+  .point .pi{flex:none;width:48px;height:48px;border-radius:14px;background:var(--ink);color:var(--gold);display:grid;place-items:center}
+  .point h4{font-family:var(--display);font-weight:600;font-size:1.18rem;margin-bottom:4px}
+  .point p{color:var(--slate);font-size:.98rem}
+  .commit-visual{position:relative;border-radius:26px;overflow:hidden;box-shadow:var(--shadow)}
+  .commit-visual img{width:100%;height:auto;display:block;object-fit:contain}
+  .commit-quote{
+    position:absolute;left:24px;right:24px;bottom:24px;background:rgba(255,255,255,.94);
+    backdrop-filter:blur(8px);padding:22px 24px;border-radius:18px;
+  }
+  .commit-quote p{font-family:var(--display);font-style:italic;font-size:1.08rem;color:var(--ink);line-height:1.4}
+
+  /* ---------- SERVICES ---------- */
+  .services{background:var(--ink);color:var(--cream)}
+  .services .sec-title,.services .point h4{color:var(--cream)}
+  .services .sec-desc{color:var(--sage)}
+  .services .sec-tag{color:var(--gold)}
+  .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+  .svc-card{
+    background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);
+    border-radius:22px;overflow:hidden;transition:transform .4s,border-color .4s,background .4s;
+    display:flex;flex-direction:column;
+  }
+  .svc-card:hover{transform:translateY(-8px);border-color:rgba(200,151,63,.55);background:rgba(255,255,255,.07)}
+  .svc-img{overflow:hidden;position:relative;background:#fff}
+  .svc-img img{width:100%;height:auto;display:block;object-fit:contain;transition:transform .6s}
+  .svc-card:hover .svc-img img{transform:scale(1.07)}
+  .svc-num{position:absolute;top:16px;left:16px;font-family:var(--display);font-weight:600;font-size:1.1rem;color:var(--ink);background:var(--gold);width:42px;height:42px;border-radius:50%;display:grid;place-items:center}
+  .svc-body{padding:26px 26px 30px}
+  .svc-body h3{font-family:var(--display);font-weight:600;font-size:1.32rem;margin-bottom:12px;line-height:1.15}
+  .svc-body p{color:var(--sage);font-size:.96rem}
+  .svc-body ul{list-style:none;margin-top:18px;display:flex;flex-wrap:wrap;gap:8px}
+  .svc-body li{font-size:.78rem;color:var(--cream);background:rgba(255,255,255,.07);padding:5px 12px;border-radius:50px;border:1px solid rgba(255,255,255,.12)}
+
+  /* ---------- WHO WE SERVE / BAND ---------- */
+  .band{background:linear-gradient(135deg,var(--moss),var(--ink));color:var(--cream);border-radius:30px;padding:64px 56px;position:relative;overflow:hidden;margin:0 28px}
+  .band::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 85% 20%,rgba(200,151,63,.25),transparent 50%)}
+  .band-inner{position:relative;z-index:2;display:grid;grid-template-columns:1.1fr 1fr;gap:50px;align-items:center}
+  .band h2{font-family:var(--display);font-weight:600;font-size:clamp(1.9rem,3.4vw,2.7rem);line-height:1.1;letter-spacing:-.02em}
+  .band p{color:var(--sage);margin-top:18px;font-size:1.05rem;max-width:440px}
+  .serve-list{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .serve-item{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.13);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:8px}
+  .serve-item .si{color:var(--gold)}
+  .serve-item h5{font-family:var(--display);font-weight:600;font-size:1.1rem}
+  .serve-item p{font-size:.86rem;color:var(--sage);margin:0}
+
+  /* ---------- WHY / FAQ ---------- */
+  .faq-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:60px;align-items:start}
+  .faq-item{border-bottom:1px solid var(--line);padding:24px 0}
+  .faq-q{display:flex;justify-content:space-between;align-items:center;gap:20px;cursor:pointer;font-family:var(--display);font-weight:600;font-size:1.2rem;color:var(--ink)}
+  .faq-q .pm{flex:none;width:34px;height:34px;border-radius:50%;border:1.5px solid var(--line);display:grid;place-items:center;transition:.3s;color:var(--moss)}
+  .faq-item.open .pm{background:var(--ink);color:var(--gold);border-color:var(--ink);transform:rotate(45deg)}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .4s ease;color:var(--slate)}
+  .faq-item.open .faq-a{max-height:240px;padding-top:14px}
+
+  /* ---------- CONTACT ---------- */
+  .contact{background:linear-gradient(180deg,var(--cream),var(--paper))}
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+  .contact-info .ci-row{display:flex;gap:16px;align-items:center;padding:22px 0;border-bottom:1px solid var(--line)}
+  .contact-info .ci-row .ic{flex:none;width:52px;height:52px;border-radius:15px;background:var(--ink);color:var(--gold);display:grid;place-items:center}
+  .contact-info .ci-row .l{font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--moss)}
+  .contact-info .ci-row .v{font-family:var(--display);font-weight:600;font-size:1.25rem;color:var(--ink)}
+  .form-card{background:var(--paper);border:1px solid var(--line);border-radius:24px;padding:38px;box-shadow:var(--shadow)}
+  .form-card h3{font-family:var(--display);font-weight:600;font-size:1.55rem;margin-bottom:6px}
+  .form-card .fp{color:var(--slate);margin-bottom:24px;font-size:.95rem}
+  .field{margin-bottom:18px}
+  .field label{display:block;font-size:.82rem;font-weight:600;color:var(--slate);margin-bottom:7px}
+  .field input,.field select,.field textarea{
+    width:100%;padding:13px 16px;border:1px solid var(--line);border-radius:12px;
+    font-family:var(--body);font-size:.95rem;background:#fff;color:var(--ink);transition:border .25s,box-shadow .25s;
+  }
+  .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--moss);box-shadow:0 0 0 3px rgba(28,52,97,.18)}
+  .field textarea{resize:vertical;min-height:110px}
+  .form-card .cta-btn{width:100%;justify-content:center;padding:15px}
+  .form-note{text-align:center;font-size:.84rem;color:var(--moss);margin-top:14px;display:none}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--ink);color:var(--sage);padding:64px 0 30px}
+  .foot-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:40px;padding-bottom:46px;border-bottom:1px solid rgba(255,255,255,.1)}
+  footer .logo{color:var(--cream)}
+  footer p{font-size:.94rem;max-width:320px;margin-top:16px}
+  .foot-col h5{color:var(--cream);font-family:var(--display);font-weight:600;font-size:1.05rem;margin-bottom:16px}
+  .foot-col a{display:block;padding:6px 0;color:var(--sage);font-size:.92rem;transition:color .25s}
+  .foot-col a:hover{color:var(--gold)}
+  .foot-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:24px;font-size:.84rem;flex-wrap:wrap;gap:12px}
+  .socials{display:flex;gap:12px}
+  .socials a{width:38px;height:38px;border-radius:10px;border:1px solid rgba(255,255,255,.15);display:grid;place-items:center;color:var(--sage);transition:.25s}
+  .socials a:hover{background:var(--gold);color:var(--ink);border-color:var(--gold)}
+
+  /* ---------- CHATBOT ---------- */
+  .chat-fab{
+    position:fixed;bottom:26px;right:26px;z-index:90;width:62px;height:62px;border-radius:50%;
+    background:var(--gold);color:var(--ink);border:none;cursor:pointer;display:grid;place-items:center;
+    box-shadow:0 16px 34px -8px rgba(200,151,63,.6);transition:transform .3s,background .3s;
+  }
+  .chat-fab:hover{transform:scale(1.08) rotate(6deg);background:var(--gold-deep);color:#fff}
+  .chat-fab .x{display:none}
+  .chat-fab.open .chat-icon{display:none}
+  .chat-fab.open .x{display:block}
+  .chat-fab .pulse{position:absolute;inset:0;border-radius:50%;background:var(--gold);animation:pulse 2.4s ease-out infinite;z-index:-1}
+  @keyframes pulse{0%{transform:scale(1);opacity:.55}100%{transform:scale(1.8);opacity:0}}
+
+  .chat-panel{
+    position:fixed;bottom:100px;right:26px;z-index:90;width:380px;max-width:calc(100vw - 36px);
+    height:560px;max-height:calc(100vh - 130px);background:var(--paper);border-radius:24px;
+    box-shadow:0 30px 70px -18px rgba(14,31,61,.5);display:flex;flex-direction:column;overflow:hidden;
+    opacity:0;transform:translateY(20px) scale(.96);pointer-events:none;transition:opacity .3s,transform .3s;
+    border:1px solid var(--line);
+  }
+  .chat-panel.open{opacity:1;transform:none;pointer-events:auto}
+  .chat-head{background:linear-gradient(135deg,var(--moss),var(--ink));color:var(--cream);padding:20px 22px;display:flex;align-items:center;gap:13px}
+  .chat-head .mark{width:42px;height:42px;border-radius:12px;background:rgba(255,255,255,.12);display:grid;place-items:center;color:var(--gold);font-family:var(--display);font-weight:700}
+  .chat-head .t{font-family:var(--display);font-weight:600;font-size:1.08rem}
+  .chat-head .s{font-size:.78rem;color:var(--sage);display:flex;align-items:center;gap:6px}
+  .chat-head .s .live{width:7px;height:7px;border-radius:50%;background:#5ad07a;box-shadow:0 0 0 3px rgba(90,208,122,.3)}
+  .chat-body{flex:1;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:14px;background:linear-gradient(180deg,var(--paper),var(--cream))}
+  .msg{max-width:82%;padding:12px 16px;border-radius:16px;font-size:.92rem;line-height:1.5;animation:pop .3s ease}
+  @keyframes pop{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  .msg.bot{background:#fff;border:1px solid var(--line);color:var(--slate);align-self:flex-start;border-bottom-left-radius:5px}
+  .msg.user{background:var(--ink);color:var(--cream);align-self:flex-end;border-bottom-right-radius:5px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;padding:0 20px 8px}
+  .chip{background:#fff;border:1px solid var(--moss);color:var(--moss);padding:8px 14px;border-radius:50px;font-size:.82rem;font-weight:500;cursor:pointer;transition:.25s;font-family:var(--body)}
+  .chip:hover{background:var(--moss);color:#fff}
+  .typing{display:flex;gap:4px;padding:14px 16px;background:#fff;border:1px solid var(--line);border-radius:16px;border-bottom-left-radius:5px;align-self:flex-start;width:fit-content}
+  .typing span{width:7px;height:7px;border-radius:50%;background:var(--sage);animation:blink 1.2s infinite}
+  .typing span:nth-child(2){animation-delay:.2s}.typing span:nth-child(3){animation-delay:.4s}
+  @keyframes blink{0%,60%,100%{opacity:.3}30%{opacity:1}}
+  .chat-input{display:flex;gap:10px;padding:14px;border-top:1px solid var(--line);background:var(--paper)}
+  .chat-input input{flex:1;padding:12px 16px;border:1px solid var(--line);border-radius:50px;font-family:var(--body);font-size:.92rem;background:#fff}
+  .chat-input input:focus{outline:none;border-color:var(--moss)}
+  .chat-input button{width:46px;height:46px;border-radius:50%;border:none;background:var(--gold);color:var(--ink);cursor:pointer;display:grid;place-items:center;flex:none;transition:.25s}
+  .chat-input button:hover{background:var(--gold-deep);color:#fff}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media(max-width:980px){
+    .hero-inner,.commit-grid,.svc-grid,.band-inner,.faq-grid,.contact-grid,.foot-grid{grid-template-columns:1fr}
+    .hero-visual{max-width:440px;margin:0 auto}
+    .svc-grid{gap:20px}
+    nav ul{display:none}
+    nav ul.show{display:flex;position:absolute;top:100%;left:0;right:0;flex-direction:column;background:var(--paper);padding:24px 28px;gap:18px;box-shadow:var(--shadow);border-top:1px solid var(--line)}
+    .nav-toggle{display:flex}
+    .band{margin:0 16px;padding:44px 28px}
+    .serve-list{grid-template-columns:1fr 1fr}
+  }
+  @media(max-width:560px){
+    .wrap{padding:0 18px}
+    .hero-stats{gap:22px;flex-wrap:wrap}
+    .hero-badge.tl{left:8px}.hero-badge.br{right:8px}
+    .serve-list{grid-template-columns:1fr}
+    .foot-bottom{flex-direction:column;align-items:flex-start}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a href="#top" class="logo">
+      <span class="mark">A</span>
+      <span>Atlas Gate<small>Home Services</small></span>
+    </a>
+    <nav>
+      <ul id="menu">
+        <li><a href="#commitment">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#serve">Who We Help</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#contact" class="cta-btn gold">Get a Quote</a></li>
+      </ul>
+      <button class="nav-toggle" id="toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-bg"></div>
+  <div class="hero-grain"></div>
+  <div class="wrap hero-inner">
+    <div class="hero-copy">
+      <span class="eyebrow reveal in"><span class="dot"></span> Serving Dallas–Fort Worth</span>
+      <h1 class="hero-title reveal in d1">Property care done <em>right</em> the first time.</h1>
+      <p class="hero-sub reveal in d2">From full property make-ready services to detailed maintenance, we deliver dependable solutions built for long-term value and performance.</p>
+      <div class="hero-actions reveal in d3">
+        <a href="#contact" class="cta-btn gold">Get Your Free Quote →</a>
+        <a href="#services" class="link-arrow">Explore Services →</a>
+      </div>
+      <div class="hero-stats reveal in d4">
+        <div class="stat"><div class="n">On-Time</div><div class="l">Consistent completion</div></div>
+        <div class="stat"><div class="n">Full-Service</div><div class="l">Make-ready to upkeep</div></div>
+        <div class="stat"><div class="n">DFW</div><div class="l">Local & dependable</div></div>
+      </div>
+    </div>
+    <div class="hero-visual reveal in d2">
+      <div class="hero-card">
+        <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=900&q=80" alt="Well-maintained property exterior">
+      </div>
+      <div class="hero-badge tl">
+        <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg></div>
+        <div><div class="t">Quality Work</div><div class="s">Every project</div></div>
+      </div>
+      <div class="hero-badge br">
+        <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2l2.4 7.4H22l-6 4.6 2.3 7.4-6.3-4.6L5.7 21l2.3-7.4-6-4.6h7.6z"/></svg></div>
+        <div><div class="t">Reliable Service</div><div class="s">Built to last</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMMITMENT -->
+<section class="sec-pad commit" id="commitment">
+  <div class="wrap commit-grid">
+    <div class="reveal">
+      <div class="sec-tag">Our Commitment</div>
+      <h2 class="sec-title">We treat every property like it <em>matters</em> — because it does.</h2>
+      <p class="sec-desc">Our commitment is simple: dependable services, quality workmanship, and consistent results. Experienced professionals dedicated to delivering reliable property solutions, every time.</p>
+      <div class="commit-points">
+        <div class="point">
+          <div class="pi"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+          <div><h4>Quality Workmanship</h4><p>Detail-driven work that holds up — no shortcuts, no callbacks.</p></div>
+        </div>
+        <div class="point">
+          <div class="pi"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+          <div><h4>Clear Communication</h4><p>You'll always know the status of your project, start to finish.</p></div>
+        </div>
+        <div class="point">
+          <div class="pi"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+          <div><h4>On-Time Completion</h4><p>Consistent, reliable timelines you can plan and build around.</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="commit-visual reveal d2">
+      <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=800&q=80" alt="Professional cleaning and maintenance">
+      <div class="commit-quote"><p>"Dependable services, quality workmanship, and consistent results."</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="sec-pad services" id="services">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-tag">Our Services</div>
+      <h2 class="sec-title">Full-service property care, <em>handled</em>.</h2>
+      <p class="sec-desc">We handle the work, so you don't have to — for landlords, investors, realtors, and homeowners across Dallas–Fort Worth.</p>
+    </div>
+    <div class="svc-grid">
+      <article class="svc-card reveal">
+        <div class="svc-img"><span class="svc-num">01</span><img src="https://images.unsplash.com/photo-1599619351208-3e6c839d6828?auto=format&fit=crop&w=700&q=80" alt="Property preservation"></div>
+        <div class="svc-body">
+          <h3>Property Preservation & Maintenance</h3>
+          <p>Full-service care for vacant and occupied properties including securing, upkeep, repairs, and ongoing maintenance to keep properties safe and clean.</p>
+          <ul><li>Securing</li><li>Repairs</li><li>Ongoing upkeep</li></ul>
+        </div>
+      </article>
+      <article class="svc-card reveal d2">
+        <div class="svc-img"><span class="svc-num">02</span><img src="https://images.unsplash.com/photo-1556909212-d5b604d0c90d?auto=format&fit=crop&w=700&q=80" alt="Make-ready services"></div>
+        <div class="svc-body">
+          <h3>Make-Ready & Turnkey Services</h3>
+          <p>Complete property preparation for rentals or sales — cleanouts, minor repairs, deep cleaning, and final touches to make properties move-in ready.</p>
+          <ul><li>Cleanouts</li><li>Deep cleaning</li><li>Move-in ready</li></ul>
+        </div>
+      </article>
+      <article class="svc-card reveal d3">
+        <div class="svc-img"><span class="svc-num">03</span><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=700&q=80" alt="Exterior cleaning"></div>
+        <div class="svc-body">
+          <h3>Exterior Cleaning & Curb Appeal</h3>
+          <p>Pressure washing, lawn care, and exterior maintenance to improve curb appeal and keep properties looking professional and well-maintained.</p>
+          <ul><li>Pressure washing</li><li>Lawn care</li><li>Curb appeal</li></ul>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- WHO WE SERVE -->
+<section class="sec-pad" id="serve">
+  <div class="band reveal">
+    <div class="band-inner">
+      <div>
+        <h2>Let's get your property ready.</h2>
+        <p>Fast, reliable property services for the people who keep DFW moving. We handle the work, so you don't have to.</p>
+        <a href="#contact" class="cta-btn gold" style="margin-top:26px">Start Your Project →</a>
+      </div>
+      <div class="serve-list">
+        <div class="serve-item"><span class="si"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-4"/></svg></span><h5>Landlords</h5><p>Keep units rent-ready and well-kept.</p></div>
+        <div class="serve-item"><span class="si"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18M7 14l4-4 4 4 6-6"/></svg></span><h5>Investors</h5><p>Protect and grow asset value.</p></div>
+        <div class="serve-item"><span class="si"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg></span><h5>Realtors</h5><p>List with confidence and polish.</p></div>
+        <div class="serve-item"><span class="si"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span><h5>Homeowners</h5><p>Trusted help for your home.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec-pad" id="faq">
+  <div class="wrap faq-grid">
+    <div class="reveal">
+      <div class="sec-tag">FAQ</div>
+      <h2 class="sec-title">Questions, <em>answered</em>.</h2>
+      <p class="sec-desc">Still curious? Tap the chat in the corner — we're happy to help.</p>
+    </div>
+    <div class="reveal d2">
+      <div class="faq-item open">
+        <div class="faq-q">What areas do you serve?<span class="pm">+</span></div>
+        <div class="faq-a">We proudly serve landlords, investors, realtors, and homeowners across the entire Dallas–Fort Worth metroplex.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Do you work on vacant and occupied properties?<span class="pm">+</span></div>
+        <div class="faq-a">Yes. Our property preservation and maintenance services cover both vacant and occupied properties — securing, upkeep, repairs, and ongoing maintenance.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What's included in make-ready service?<span class="pm">+</span></div>
+        <div class="faq-a">Complete property preparation for rentals or sales: cleanouts, minor repairs, deep cleaning, and final touches that make a property fully move-in ready.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">How do I get a quote?<span class="pm">+</span></div>
+        <div class="faq-a">Fill out the contact form below, call us at (214) 819-0233, or message us in the chat. We'll respond promptly to get your project started.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="sec-pad contact" id="contact">
+  <div class="wrap contact-grid">
+    <div class="contact-info reveal">
+      <div class="sec-tag">Get In Touch</div>
+      <h2 class="sec-title" style="margin-bottom:14px">Ready when <em>you</em> are.</h2>
+      <p class="sec-desc" style="margin-bottom:20px">Reach out for a free, no-obligation quote. We handle the work, so you don't have to.</p>
+      <a class="ci-row" href="tel:2148190233">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+        <div><div class="l">Phone</div><div class="v">(214) 819-0233</div></div>
+      </a>
+      <a class="ci-row" href="mailto:Office@atlasgategroupllc.com">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg></div>
+        <div><div class="l">Email</div><div class="v" style="font-size:1.02rem">Office@atlasgategroupllc.com</div></div>
+      </a>
+      <div class="ci-row" style="border:none">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <div><div class="l">Service Area</div><div class="v">Dallas–Fort Worth, TX</div></div>
+      </div>
+    </div>
+    <div class="form-card reveal d2">
+      <h3>Request a Free Quote</h3>
+      <p class="fp">Tell us about your property and we'll be in touch.</p>
+      <div class="field"><label>Name</label><input type="text" id="f-name" placeholder="Your name"></div>
+      <div class="field"><label>Email or Phone</label><input type="text" id="f-contact" placeholder="How we can reach you"></div>
+      <div class="field"><label>Service Needed</label>
+        <select id="f-svc">
+          <option>Property Preservation & Maintenance</option>
+          <option>Make-Ready & Turnkey Services</option>
+          <option>Exterior Cleaning & Curb Appeal</option>
+          <option>Not sure — need advice</option>
+        </select>
+      </div>
+      <div class="field"><label>Project Details</label><textarea id="f-msg" placeholder="Tell us about the property and what you need..."></textarea></div>
+      <button class="cta-btn gold" id="f-submit">Send Request →</button>
+      <div class="form-note" id="f-note">✓ Thank you! We'll be in touch shortly.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a href="#top" class="logo"><span class="mark">A</span><span>Atlas Gate<small>Home Services</small></span></a>
+        <p>Reliable property services for landlords, investors, realtors, and homeowners across Dallas–Fort Worth.</p>
+      </div>
+      <div class="foot-col">
+        <h5>Services</h5>
+        <a href="#services">Property Preservation</a>
+        <a href="#services">Make-Ready & Turnkey</a>
+        <a href="#services">Exterior & Curb Appeal</a>
+      </div>
+      <div class="foot-col">
+        <h5>Company</h5>
+        <a href="#commitment">About Us</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Atlas Gate Home Services. All rights reserved.</span>
+      <div class="socials">
+        <a href="#" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+        <a href="#" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+        <a href="#" aria-label="X"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h3l-7 8 8 12h-6l-5-7-5 7H1l8-9L1 2h6l5 6z"/></svg></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- CHATBOT -->
+<button class="chat-fab" id="chatFab" aria-label="Open chat">
+  <span class="pulse"></span>
+  <svg class="chat-icon" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8z"/></svg>
+  <svg class="x" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M18 6 6 18M6 6l12 12"/></svg>
+</button>
+
+<div class="chat-panel" id="chatPanel">
+  <div class="chat-head">
+    <div class="mark">A</div>
+    <div><div class="t">Atlas Assistant</div><div class="s"><span class="live"></span> Typically replies instantly</div></div>
+  </div>
+  <div class="chat-body" id="chatBody"></div>
+  <div class="chips" id="chatChips"></div>
+  <div class="chat-input">
+    <input type="text" id="chatInput" placeholder="Type your message...">
+    <button id="chatSend" aria-label="Send"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4z"/></svg></button>
+  </div>
+</div>
+
+<script>
+/* NAV scroll */
+const nav=document.getElementById('nav');
+addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>40));
+/* mobile menu */
+document.getElementById('toggle').onclick=()=>document.getElementById('menu').classList.toggle('show');
+document.querySelectorAll('#menu a').forEach(a=>a.onclick=()=>document.getElementById('menu').classList.remove('show'));
+
+/* reveal on scroll */
+const io=new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.15});
+document.querySelectorAll('.reveal:not(.in)').forEach(el=>io.observe(el));
+
+/* FAQ */
+document.querySelectorAll('.faq-item').forEach(item=>{
+  item.querySelector('.faq-q').onclick=()=>{
+    const open=item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+    if(!open)item.classList.add('open');
+  };
+});
+
+/* contact form (demo) */
+document.getElementById('f-submit').onclick=()=>{
+  const n=document.getElementById('f-name').value.trim();
+  const c=document.getElementById('f-contact').value.trim();
+  if(!n||!c){alert('Please add your name and how we can reach you.');return;}
+  document.getElementById('f-note').style.display='block';
+  ['f-name','f-contact','f-msg'].forEach(id=>document.getElementById(id).value='');
+};
+
+/* ---------- CHATBOT (rule-based) ---------- */
+const fab=document.getElementById('chatFab'),panel=document.getElementById('chatPanel'),
+body=document.getElementById('chatBody'),chips=document.getElementById('chatChips'),
+input=document.getElementById('chatInput'),send=document.getElementById('chatSend');
+let greeted=false;
+
+const knowledge=[
+  {k:['service','offer','do you do','what do you'],a:"We offer three core services: 🏠 Property Preservation & Maintenance, 🔑 Make-Ready & Turnkey Services, and ✨ Exterior Cleaning & Curb Appeal. Which one interests you?"},
+  {k:['preservation','maintenance','vacant','occupied','secure','repair'],a:"Our Property Preservation & Maintenance covers vacant and occupied properties — securing, upkeep, repairs, and ongoing maintenance to keep things safe and clean. Want a quote?"},
+  {k:['make','ready','turnkey','move-in','move in','cleanout','rental'],a:"Make-Ready & Turnkey gets a property rental- or sale-ready: cleanouts, minor repairs, deep cleaning, and final touches for a move-in-ready result. Shall I help you start a request?"},
+  {k:['exterior','curb','pressure','wash','lawn','clean'],a:"Exterior Cleaning & Curb Appeal includes pressure washing, lawn care, and exterior maintenance to keep a property looking professional. Want to book this?"},
+  {k:['area','where','location','serve','dallas','fort worth','dfw','texas'],a:"We serve the entire Dallas–Fort Worth metroplex 📍 — landlords, investors, realtors, and homeowners alike."},
+  {k:['quote','price','cost','estimate','how much'],a:"Quotes are free and no-obligation! Scroll to the contact form, call (214) 819-0233, or tell me your name + property details and I'll pass them along."},
+  {k:['phone','call','number','contact','reach','email'],a:"You can reach us at 📞 (214) 819-0233 or ✉️ Office@atlasgategroupllc.com. We typically respond promptly!"},
+  {k:['hour','open','time','available'],a:"We work around your schedule across DFW. Send a request and we'll confirm timing that works for your project."},
+  {k:['hello','hi','hey','yo','good morning','good afternoon'],a:"Hi there! 👋 Welcome to Atlas Gate Home Services. How can I help with your property today?"},
+  {k:['thank','thanks','appreciate'],a:"You're very welcome! Anything else I can help with? 😊"},
+  {k:['who','about','company','atlas'],a:"Atlas Gate Home Services is a Dallas–Fort Worth property services company. Our commitment is simple — dependable services, quality workmanship, and consistent, on-time results."}
+];
+const fallback="Great question! For specifics, the best route is a quick quote request — call (214) 819-0233, email Office@atlasgategroupllc.com, or use the form on this page. Want me to point you there?";
+
+const quickChips=['What services do you offer?','Where do you serve?','Get a free quote','Contact info'];
+
+function addMsg(text,who){
+  const d=document.createElement('div');d.className='msg '+who;d.innerHTML=text;
+  body.appendChild(d);body.scrollTop=body.scrollHeight;
+}
+function showChips(){
+  chips.innerHTML='';
+  quickChips.forEach(c=>{
+    const b=document.createElement('button');b.className='chip';b.textContent=c;
+    b.onclick=()=>{chips.innerHTML='';handleUser(c);};
+    chips.appendChild(b);
+  });
+}
+function botReply(q){
+  const t=q.toLowerCase();
+  let ans=fallback;
+  for(const item of knowledge){if(item.k.some(k=>t.includes(k))){ans=item.a;break;}}
+  const typing=document.createElement('div');typing.className='typing';typing.innerHTML='<span></span><span></span><span></span>';
+  body.appendChild(typing);body.scrollTop=body.scrollHeight;
+  setTimeout(()=>{typing.remove();addMsg(ans,'bot');showChips();},700+Math.random()*500);
+}
+function handleUser(text){
+  addMsg(text.replace(/</g,'&lt;'),'user');
+  chips.innerHTML='';
+  botReply(text);
+}
+function openChat(){
+  panel.classList.add('open');fab.classList.add('open');
+  if(!greeted){greeted=true;
+    setTimeout(()=>{addMsg("Hi! 👋 I'm the Atlas Assistant. Ask me about our services, service area, or getting a quote.",'bot');showChips();},250);
+  }
+}
+fab.onclick=()=>{
+  const open=panel.classList.contains('open');
+  if(open){panel.classList.remove('open');fab.classList.remove('open');}
+  else openChat();
+};
+send.onclick=()=>{const v=input.value.trim();if(v){handleUser(v);input.value='';}};
+input.onkeydown=e=>{if(e.key==='Enter')send.onclick();};
+</script>
+</body>
+</html>
