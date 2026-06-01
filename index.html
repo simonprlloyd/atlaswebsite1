@@ -381,6 +381,39 @@
     .cat-grid{grid-template-columns:1fr}
     .foot-bottom{flex-direction:column;align-items:flex-start}
   }
+
+  /* ---------- LIVING / CONVERSATIONAL TOUCHES ---------- */
+  /* time-based greeting dot keeps a soft heartbeat */
+  .eyebrow .dot{animation:beat 2.4s ease-in-out infinite}
+  @keyframes beat{0%,100%{box-shadow:0 0 0 4px rgba(200,151,63,.2)}50%{box-shadow:0 0 0 7px rgba(200,151,63,.08)}}
+
+  /* typewriter strapline under the headline */
+  .hero-type{
+    font-family:var(--display);font-weight:500;font-size:clamp(1.15rem,2vw,1.6rem);
+    color:var(--gold-deep);margin:-8px 0 20px;min-height:1.5em;letter-spacing:-.01em;
+  }
+  .hero-type .word{font-style:italic}
+  .caret{display:inline-block;width:2px;height:1.05em;background:var(--gold-deep);
+    margin-left:3px;vertical-align:-2px;animation:blink 1s steps(1) infinite}
+  @keyframes blink{50%{opacity:0}}
+
+  /* hero visual reacts to the cursor */
+  .hero-visual{transition:transform .25s ease-out;will-change:transform}
+
+  /* proactive chat nudge bubble */
+  .chat-nudge{
+    position:fixed;right:26px;bottom:96px;max-width:240px;z-index:60;
+    background:var(--paper);color:var(--ink);border-radius:16px 16px 4px 16px;
+    padding:14px 16px;box-shadow:var(--shadow);font-size:.92rem;line-height:1.4;
+    border:1px solid var(--line);cursor:pointer;opacity:0;transform:translateY(14px) scale(.96);
+    pointer-events:none;transition:opacity .4s,transform .4s;
+  }
+  .chat-nudge.show{opacity:1;transform:translateY(0) scale(1);pointer-events:auto;animation:nudgePop 3.2s ease-in-out infinite}
+  .chat-nudge b{color:var(--gold-deep)}
+  .chat-nudge .close{position:absolute;top:-8px;right:-8px;width:22px;height:22px;border-radius:50%;
+    background:var(--ink);color:#fff;border:none;font-size:13px;line-height:1;cursor:pointer;display:grid;place-items:center}
+  @keyframes nudgePop{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+  @media(max-width:560px){.chat-nudge{right:18px;bottom:88px;max-width:200px}}
 </style>
 </head>
 <body>
@@ -410,8 +443,9 @@
   <div class="hero-grain"></div>
   <div class="wrap hero-inner">
     <div class="hero-copy">
-      <span class="eyebrow reveal in"><span class="dot"></span> Serving Dallas–Fort Worth</span>
+      <span class="eyebrow reveal in"><span class="dot"></span> <span id="greet">Welcome</span> · Serving Dallas–Fort Worth</span>
       <h1 class="hero-title reveal in d1">Property care done <em>right</em> the first time.</h1>
+      <p class="hero-type reveal in d1">We handle the <span class="word" id="typer"></span><span class="caret"></span></p>
       <p class="hero-sub reveal in d2">Our in-house team handles painting, cleaning, lawn care, power washing, junk removal and more — and for plumbing, HVAC, electrical, and roofing we bring in licensed specialists. One call handles it all.</p>
       <div class="hero-actions reveal in d3">
         <a href="#contact" class="cta-btn gold">Get Your Free Quote →</a>
@@ -802,6 +836,10 @@
 </footer>
 
 <!-- CHATBOT -->
+<div class="chat-nudge" id="chatNudge">
+  <button class="close" id="nudgeClose" aria-label="Dismiss">×</button>
+  <span id="nudgeText"></span>
+</div>
 <button class="chat-fab" id="chatFab" aria-label="Open chat">
   <span class="pulse"></span>
   <svg class="chat-icon" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8z"/></svg>
@@ -997,8 +1035,9 @@ function handleUser(text){
 }
 function openChat(){
   panel.classList.add('open');fab.classList.add('open');
+  var nd=document.getElementById('chatNudge'); if(nd) nd.classList.remove('show');
   if(!greeted){greeted=true;
-    setTimeout(()=>{addMsg("Hi! 👋 I'm the Atlas Assistant. Ask me about our services, service area, or getting a quote.",'bot');showChips();},250);
+    setTimeout(()=>{addMsg((window.__greet||'Hi')+"! 👋 I'm the Atlas Assistant — ask me about our services, service area, plans, or getting a free quote.",'bot');showChips();},250);
   }
 }
 fab.onclick=()=>{
@@ -1008,6 +1047,59 @@ fab.onclick=()=>{
 };
 send.onclick=()=>{const v=input.value.trim();if(v){handleUser(v);input.value='';}};
 input.onkeydown=e=>{if(e.key==='Enter')send.onclick();};
+
+/* ---------- LIVING / CONVERSATIONAL TOUCHES ---------- */
+/* time-based greeting */
+(function(){
+  const hh=new Date().getHours();
+  window.__greet = hh<12 ? 'Good morning' : hh<17 ? 'Good afternoon' : 'Good evening';
+  const g=document.getElementById('greet'); if(g) g.textContent=window.__greet+' 👋';
+})();
+
+/* typewriter strapline cycling through services */
+(function(){
+  const el=document.getElementById('typer'); if(!el) return;
+  const phrases=['painting.','deep cleaning.','lawn care.','power washing.','junk removal.','appliance installs.','handyman fixes.','plumbing & HVAC.'];
+  let pi=0,ci=0,del=false;
+  (function tick(){
+    const w=phrases[pi];
+    el.textContent = del ? w.slice(0,ci--) : w.slice(0,ci++);
+    if(!del && ci>w.length){del=true;return setTimeout(tick,1500);}
+    if(del && ci<0){del=false;pi=(pi+1)%phrases.length;ci=0;return setTimeout(tick,220);}
+    setTimeout(tick, del?34:68);
+  })();
+})();
+
+/* hero visual follows the cursor a touch */
+(function(){
+  const hv=document.querySelector('.hero-visual');
+  const hero=document.querySelector('.hero');
+  if(!hv||!hero||!matchMedia('(pointer:fine)').matches) return;
+  hero.addEventListener('mousemove',e=>{
+    const r=hero.getBoundingClientRect();
+    const x=(e.clientX-r.left)/r.width-0.5, y=(e.clientY-r.top)/r.height-0.5;
+    hv.style.transform='translate('+(x*16).toFixed(1)+'px,'+(y*16).toFixed(1)+'px)';
+  });
+  hero.addEventListener('mouseleave',()=>{hv.style.transform='';});
+})();
+
+/* proactive chat nudge that greets the visitor */
+(function(){
+  const nudge=document.getElementById('chatNudge');
+  if(!nudge) return;
+  const closeBtn=document.getElementById('nudgeClose');
+  const txt=document.getElementById('nudgeText');
+  let dismissed=false;
+  txt.innerHTML=(window.__greet||'Hi')+"! Looking for a <b>free quote</b> or have a question about your home? Tap to chat \uD83D\uDCAC";
+  function reveal(){
+    if(dismissed) return;
+    if(panel.classList.contains('open')) return;
+    nudge.classList.add('show');
+  }
+  setTimeout(reveal,5500);
+  nudge.addEventListener('click',e=>{ if(e.target===closeBtn) return; dismissed=true; nudge.classList.remove('show'); openChat(); });
+  closeBtn.addEventListener('click',e=>{ e.stopPropagation(); dismissed=true; nudge.classList.remove('show'); });
+})();
 </script>
 </body>
 </html>
